@@ -11,7 +11,7 @@ const currentTempButton = document.getElementById("currentTempButton");
 
 
 const updateTemperature = () => {
-    tempValue.textContent = `${temperature}F`;
+    tempValue.textContent = `${temperature}°F`;
     tempValue.style.color = getFontColor(temperature);
     landScape.textContent = getLandscape(temperature);
 };
@@ -46,50 +46,28 @@ currentTempButton.addEventListener("click", () => {
 
     axios.get('http://127.0.0.1:5000/location', {params:{"q": city}})
     .then((locationResponse) => { 
-        const { lat, lon } = locationResponse.data;
-
-        return axios.get('http://127.0.0.1:5000/weather', {params:{"lat": lat, "lon": lon}})
+        const lat = locationResponse.data[0].lat;
+        const lon = locationResponse.data[0].lon;
+        
+        axios.get('http://127.0.0.1:5000/weather', {params:{"lat": lat, "lon": lon}})
+            .then((tempResponse) => {
+                const currentTemp = tempResponse.data.main.temp;
+            })
     })
-    
 });
-
-// @bp.get("/location")
-// def get_lat_lon():
-//     loc_query = request.args.get("q")
-//     if not loc_query:
-//         return {"message": "must provide q parameter (location)"}, 400
-
-//     response = requests.get(
-//         "https://us1.locationiq.com/v1/search.php",
-//         params={"q": loc_query, "key": location_key, "format": "json"}
-
-// def get_weather():
-//     lat_query = request.args.get("lat")
-//     lon_query = request.args.get("lon")
-
-//     if not lat_query or not lon_query:
-//         return {"message": "must provide lat and lon parameters"}, 400
-
-//     response = requests.get(
-//         "https://api.openweathermap.org/data/2.5/weather",
-//         params={"lat": lat_query, "lon": lon_query, "appid": weather_key}
-//     )
-//     return response.json(), 200
-
 
 updateTemperature();
 
 const updateCityName = (updateCity) => {
     headerCityName.textContent = updateCity;
-}
+};
 
 cityNameInput.addEventListener("input", (event) => {
     updateCityName(event.target.value);
-})
+});
 
 cityNameReset.addEventListener("click", () => {
     cityNameInput.value = '';
     updateCityName('Seattle');
-}
-)
+});
 
