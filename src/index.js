@@ -68,7 +68,7 @@ const getCityTemperature = (city) => {
                 tempValue.textContent = `${fahrenheitTemp}°F`;
             })
     })
-});
+};
 
 updateTemperature();
 
