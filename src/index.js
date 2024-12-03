@@ -51,7 +51,9 @@ currentTempButton.addEventListener("click", () => {
         
         axios.get('http://127.0.0.1:5000/weather', {params:{"lat": lat, "lon": lon}})
             .then((tempResponse) => {
-                const currentTemp = tempResponse.data.main.temp;
+                const kelvinTemp = tempResponse.data.main.temp;
+                const fahrenheitTemp = Math.floor(((kelvinTemp - 273.15) * 9) / 5 + 32);
+                tempValue.textContent = `${fahrenheitTemp}°F`;
             })
     })
 });
