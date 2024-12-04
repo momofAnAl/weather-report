@@ -10,15 +10,25 @@ const headerCityName = document.getElementById('headerCityName');
 const getRealTimeTempButton = document.getElementById('getRealTimeTempButton');
 const skyOptions = {
     'sunny': {
-        text: "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
-        backgroundColor: "yellow",
+        'text': "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
+        'backgroundColor': "#DFFFFF",
     },
-    'cloudy': "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️",
-    'rainy': "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧",
-    'snowy': "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨",
+    'cloudy': {
+        'text': "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️",
+        'backgroundColor': "#D3D3D3",
+    },
+    'rainy': {
+        'text': "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧",
+        'backgroundColor': "#B0C3DF",
+    },
+    'snowy': {
+        'text': "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨",
+        'backgroundColor': "#ADD9E6",
+    },
 };
 const skySelect = document.getElementById("skySelect");
-const skyDisplay = document.getElementById("sky")
+const skyDisplay = document.getElementById("skyDisplay")
+const gardenContent = document.getElementById("gardenContent")
 
 skySelect.addEventListener("change", (event) => {
     const skySelected = event.target.value;
@@ -27,8 +37,12 @@ skySelect.addEventListener("change", (event) => {
 });
 
 const updateSky = (sky) => {
-    skyDisplay.textContent = skyOptions[sky][text];
-    skyDisplay.style.backgroundColor = skyOptions[sky][backgroundColor];
+    const skySelectOption = skyOptions[sky]
+    console.log(skySelectOption)
+    if (skySelectOption) {
+        skyDisplay.textContent = skySelectOption.text;
+        gardenContent.style.backgroundColor = skySelectOption.backgroundColor;
+    }    
 };
 
 const updateTemperature = () => {
