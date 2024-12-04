@@ -15,7 +15,7 @@ const skyOptions = {
     'snowy': "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨",
 };
 const skySelect = document.getElementById("skySelect");
-const skyDisplay = document.getElementById("skyDisplay")
+const skyDisplay = document.getElementById("sky")
 
 skySelect.addEventListener("change", (event) => {
     const skySelected = event.target.value;
@@ -106,18 +106,3 @@ skySelect.addEventListener("change", (event) => {
     console.log(event.target.value);
     updateSky(event.target.value);
 });
-
-const updateSky = (value) => {
-    if (value === "Cloudy") {
-        return sky.textContent = "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️";
-    }
-    if (value === "Rainy") {
-        return sky.textContent = "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧";
-    }
-    if (value === "Snowy") {
-        return sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨";
-    }
-    if (value === "Sunny") {
-        return sky.textContent = "☁️ ☁️ ☁️ ☀️ ☁️ ☁️";
-    }
-};
