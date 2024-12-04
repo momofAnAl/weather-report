@@ -8,7 +8,8 @@ const cityNameInput = document.getElementById('cityNameInput');
 const cityNameReset = document.getElementById('cityNameReset');
 const headerCityName = document.getElementById('headerCityName');
 const getRealTimeTempButton = document.getElementById('getRealTimeTempButton');
-
+const skySelect = document.getElementById('skySelect');
+const sky = document.getElementById('sky');
 
 const updateTemperature = () => {
     tempValue.textContent = `${temperature}°F`;
@@ -21,7 +22,7 @@ const getLandscape = (temp) => {
     if (temp <= 69) return '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
     if (temp <= 79) return '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     return '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
-}
+};
 
 const getFontColor = (temp) => {
     if (temp <= 49) return 'teal';
@@ -29,7 +30,7 @@ const getFontColor = (temp) => {
     if (temp <= 69) return 'yellow';
     if (temp <= 79) return 'orange';
     return 'red';
-}
+};
 
 increaseTempControl.addEventListener('click', () => {
     temperature += 1;
@@ -85,3 +86,22 @@ cityNameReset.addEventListener('click', () => {
     updateCityName('Seattle');
 });
 
+skySelect.addEventListener("change", (event) => {
+    console.log(event.target.value);
+    updateSky(event.target.value);
+});
+
+const updateSky = (value) => {
+    if (value === "Cloudy") {
+        return sky.textContent = "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️";
+    }
+    if (value === "Rainy") {
+        return sky.textContent = "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧";
+    }
+    if (value === "Snowy") {
+        return sky.textContent = "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨";
+    }
+    if (value === "Sunny") {
+        return sky.textContent = "☁️ ☁️ ☁️ ☀️ ☁️ ☁️";
+    }
+};
