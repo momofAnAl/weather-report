@@ -111,7 +111,7 @@ justify-content: space-between;
 border-radius: 8px;
 font-size: 2em;
 background-color: #DFFFFF;
-transition: background-color 1s;
+transition: background-color 0.5s;
 }
 
 .city-name__reset-btn {
