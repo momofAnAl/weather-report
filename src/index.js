@@ -91,12 +91,12 @@ getRealTimeTempButton.addEventListener('click', () => {
 
 const getCityTemperature = (city) => {
     return axios
-    .get('https://ada-weather-report-proxy-server.onrender.com/', {params:{'q': city}})
+    .get('https://ada-weather-report-proxy-server.onrender.com/location', {params:{'q': city}})
     .then((locationResponse) => { 
         const lat = locationResponse.data[0].lat;
         const lon = locationResponse.data[0].lon;
         
-        axios.get('https://ada-weather-report-proxy-server.onrender.com/', {params:{"lat": lat, "lon": lon}})
+        axios.get('https://ada-weather-report-proxy-server.onrender.com/weather', {params:{"lat": lat, "lon": lon}})
             .then((tempResponse) => {
                 const kelvinTemp = tempResponse.data.main.temp;
                 const fahrenheitTemp = Math.floor(((kelvinTemp - 273.15) * 9) / 5 + 32);
