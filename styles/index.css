@@ -105,13 +105,12 @@ min-height: 200px;
 max-width: fit-content;
 margin: auto;
 padding: 2rem;
-
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-
 border-radius: 8px;
 font-size: 2em;
+background-color: #dfffff;
 }
 
 .city-name__reset-btn {
