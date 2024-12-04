@@ -106,3 +106,4 @@ skySelect.addEventListener("change", (event) => {
     console.log(event.target.value);
     updateSky(event.target.value);
 });
+
