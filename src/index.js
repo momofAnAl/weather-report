@@ -8,7 +8,24 @@ const cityNameInput = document.getElementById('cityNameInput');
 const cityNameReset = document.getElementById('cityNameReset');
 const headerCityName = document.getElementById('headerCityName');
 const getRealTimeTempButton = document.getElementById('getRealTimeTempButton');
+const skyOptions = {
+    'sunny': "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
+    'cloudy': "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️",
+    'rainy': "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧",
+    'snowy': "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨",
+};
+const skySelect = document.getElementById("skySelect");
+const skyDisplay = document.getElementById("skyDisplay")
 
+skySelect.addEventListener("change", (event) => {
+    const skySelected = event.target.value;
+    console.log("Selected sky:", skySelected);
+    updateSky(skySelected);
+});
+
+const updateSky = (sky) => {
+    skyDisplay.textContent = skyOptions[sky];
+};
 
 const updateTemperature = () => {
     tempValue.textContent = `${temperature}°F`;
