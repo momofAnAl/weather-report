@@ -79,7 +79,10 @@ decreaseTempControl.addEventListener('click', () => {
 getRealTimeTempButton.addEventListener('click', () => {
     const city = headerCityName.textContent;
 
-    getCityTemperature(city)
+    getCityLocation (city)
+    .then(({ lat, lon }) => {
+        return getCityTemperature(lat,lon);
+    })
     .catch((error) => {
         console.log('Error data:', error);
         tempValue.textContent = 'Unable to get temperature';
@@ -93,18 +96,24 @@ const getCityLocation = (city) => {
         const lat = locationResponse.data[0].lat;
         const lon = locationResponse.data[0].lon;  
         return { lat, lon };     
-    });    
+    })   
+    .catch((error) => {
+        console.log('Error data:', error);
+    });
 };
 
-const getCityTemperature = (lat, lon => {
+const getCityTemperature = (lat, lon) => {
     return axios
     .get('https://ada-weather-report-proxy-server.onrender.com/weather', {params:{"lat": lat, "lon": lon}})
     .then((tempResponse) => {
         const kelvinTemp = tempResponse.data.main.temp;
         const fahrenheitTemp = Math.floor(((kelvinTemp - 273.15) * 9) / 5 + 32);
         tempValue.textContent = `${fahrenheitTemp}°F`;
+    })
+    .catch((error) => {
+        console.log('Error data:', error);
     });
-})
+};
 
 updateTemperature();
 
