@@ -9,7 +9,10 @@ const cityNameReset = document.getElementById('cityNameReset');
 const headerCityName = document.getElementById('headerCityName');
 const getRealTimeTempButton = document.getElementById('getRealTimeTempButton');
 const skyOptions = {
-    'sunny': "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
+    'sunny': {
+        text: "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
+        backgroundColor: "yellow",
+    },
     'cloudy': "☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️",
     'rainy': "🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧",
     'snowy': "🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨",
@@ -24,7 +27,8 @@ skySelect.addEventListener("change", (event) => {
 });
 
 const updateSky = (sky) => {
-    skyDisplay.textContent = skyOptions[sky];
+    skyDisplay.textContent = skyOptions[sky][text];
+    skyDisplay.style.backgroundColor = skyOptions[sky][backgroundColor];
 };
 
 const updateTemperature = () => {
