@@ -8,6 +8,8 @@ const cityNameInput = document.getElementById('cityNameInput');
 const cityNameReset = document.getElementById('cityNameReset');
 const headerCityName = document.getElementById('headerCityName');
 const getRealTimeTempButton = document.getElementById('getRealTimeTempButton');
+
+//Update the sky options when we choose different sky and change the color background in garden
 const skyOptions = {
     'sunny': {
         'text': "☁️ ☁️ ☁️ ☀️ ☁️ ☁️",
@@ -45,6 +47,7 @@ const updateSky = (sky) => {
     }    
 };
 
+//Update the temperature and change font color and landscape when increase and decrease temperature
 const updateTemperature = () => {
     tempValue.textContent = `${temperature}°F`;
     tempValue.style.color = getFontColor(temperature);
@@ -75,7 +78,9 @@ decreaseTempControl.addEventListener('click', () => {
     temperature -= 1;
     updateTemperature();
 });
+updateTemperature();
 
+//getRealTimeTemp button updates the temperature when we update the city
 getRealTimeTempButton.addEventListener('click', () => {
     const city = headerCityName.textContent;
 
@@ -93,8 +98,10 @@ const getCityLocation = (city) => {
     return axios
     .get('https://ada-weather-report-proxy-server.onrender.com/location', {params:{'q': city}})
     .then((locationResponse) => { 
+        console.log(locationResponse);
         const lat = locationResponse.data[0].lat;
         const lon = locationResponse.data[0].lon;  
+        console.log({ lat, lon });
         return { lat, lon };     
     })   
     .catch((error) => {
@@ -109,14 +116,16 @@ const getCityTemperature = (lat, lon) => {
         const kelvinTemp = tempResponse.data.main.temp;
         const fahrenheitTemp = Math.floor(((kelvinTemp - 273.15) * 9) / 5 + 32);
         tempValue.textContent = `${fahrenheitTemp}°F`;
+        tempValue.style.color = getFontColor(fahrenheitTemp);
+        landScape.textContent = getLandscape(fahrenheitTemp);
     })
     .catch((error) => {
         console.log('Error data:', error);
     });
 };
 
-updateTemperature();
-
+//Update the city name when we input the city and headerCityName got update 
+//When we click reset, it comes back to our default setting
 const updateCityName = (updateCity) => {
     headerCityName.textContent = updateCity;
 };
@@ -130,8 +139,5 @@ cityNameReset.addEventListener('click', () => {
     updateCityName('Seattle');
 });
 
-skySelect.addEventListener("change", (event) => {
-    console.log(event.target.value);
-    updateSky(event.target.value);
-});
+
 
