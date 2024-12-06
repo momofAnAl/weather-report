@@ -106,6 +106,7 @@ const getCityLocation = (city) => {
     })   
     .catch((error) => {
         console.log('Error data:', error);
+        throw error
     });
 };
 
@@ -121,6 +122,7 @@ const getCityTemperature = (lat, lon) => {
     })
     .catch((error) => {
         console.log('Error data:', error);
+        throw error
     });
 };
 
