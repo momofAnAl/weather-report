@@ -139,6 +139,14 @@ cityNameInput.addEventListener('input', (event) => {
 cityNameReset.addEventListener('click', () => {
     cityNameInput.value = '';
     updateCityName('Seattle');
+
+    getCityLocation('Seattle')
+    .then(({ lat, lon }) => {
+        return getCityTemperature(lat, lon);
+    })
+    .catch((error) => {
+        console.log('Error at reset city:', error);
+    });
 });
 
 
